@@ -1,9 +1,9 @@
-Dashboard for EEG data visualization
+Dashboard for data visualization
 
 For sending continuous data you need to create a websocket connection with
 ws://localhost:8000/ws/dashboard/
 
-For running in demo mode a client.py file has been made which just connect with websocket and send random json data as EEG will generate probably.
+For running in demo mode a client.py file has been made which just connect with websocket and send random json data.
 
 Steps to run in development mode
 
@@ -15,13 +15,9 @@ python manage.py runserver
 
 3) Go on localhost:8000
 
-4) Open another command prompt other than django server and navigate to project folder and run 
+4) Open another command prompt while django server is running and navigate to project folder and run 
 python client.py
 
-
-
-
-To send data from real EEG client you need to create a client.py like file and just replace sending random data with the data you have fetched (in json format).
 
 
 
