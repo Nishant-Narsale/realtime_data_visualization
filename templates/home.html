@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <title>Home Page</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+</head>
+<body style="background-image: url({% static 'images/background3.jpg' %}); background-size: cover;">
+    <div class="container">
+        <div id="item-1" class="grid-item">Box 1</div>
+        <div id="item-2" class="grid-item">
+            <div style="max-width: 500px; max-height: 230px;">
+                <canvas id="timeSeries" width="500" height="230"></canvas>
+            </div>
+        </div>
+        <div id="item-3" class="grid-item">
+            <div style="max-width: 500px; max-height: 230px;">
+                <canvas id="barChart" width="500" height="230"></canvas>
+            </div>
+        </div>
+        <div id="item-4" class="grid-item">Box 4</div>
+        <div id="item-5" class="grid-item">Box 5</div>
+        <div id="item-6" class="grid-item">Box 6</div>
+        <div id="item-7" class="grid-item">
+            <div style="max-width: 300px; max-height: 200px;">
+                <canvas id="simpleChart" width="300" height="200"></canvas>
+            </div>
+        </div>
+        <div id="item-8" class="grid-item">Box 8</div>
+        <div id="item-9" class="grid-item">Box 9</div>
+
+    </div>
+
+    
+    <script src="{% static 'js/barChart.js' %}"></script>
+    <script src="{% static 'js/simpleGraphChart.js' %}"></script>
+    <script>
+        
+        let socket = new WebSocket(
+            'ws://'
+            + window.location.host
+            + '/ws/dashboard/'
+            )
+
+        socket.onopen = function (e) {
+            alert("Connection Done")
+        }
+
+        socket.onmessage = function (e) {
+            console.log(e.data);
+            incomingData = JSON.parse(e.data);
+
+            updateBarChart(incomingData=incomingData);
+            updateSimpleGraphData(incomingDataArray=incomingData['data'],incomingTimestamp=incomingData['timestamp']);
+
+        }
+
+        socket.onclose = function (e) {
+            alert("Connection Closed")
+        }
+
+    </script>
+</body>
+</html>
